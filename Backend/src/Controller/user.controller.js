@@ -30,7 +30,7 @@ const register = asyncHandler(async (req, res) => {
     const registeredUser = await User.findOne({ username });
 
     if (registeredUser) {
-        throw new apiError(httpStatus.FOUND, "User are allready exist PLEASE LOGIN ")
+        throw new apiError(httpStatus.CONFLICT, "User are allready exist PLEASE LOGIN ")
     }
 
     const newUser = await User.create(
