@@ -53,7 +53,7 @@ const register = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
-
+    console.log("password",password)
     if (!username || !password) {
         throw new apiError(httpStatus.NO_CONTENT, "please porvide details")
     }
@@ -84,7 +84,7 @@ const login = asyncHandler(async (req, res) => {
         .cookie("refreshToken", refreshToken, options)
         .json(new apiResponse(200,
             {
-                user: accessToken, refreshToken, loggedInUser
+                 accessToken, refreshToken, user: loggedInUser
             },
             "User successfully logged in "
         ))

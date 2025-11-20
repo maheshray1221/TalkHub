@@ -17,7 +17,8 @@ export default function Authentication() {
   const handleAuth = async () => {
     try {
       if (formState === 0) {
-
+        let result = await handleLogin(username, password)
+        console.log("result",result)
       }
       if (formState === 1) {
         let result = await handleRegister(name, username, password)
@@ -27,10 +28,10 @@ export default function Authentication() {
         setUsername("")
         setError("")
         setFormState(0)
-        setPassword('')
+        setPassword("")
       }
     } catch (err) {
-      let message = "user allready exist" || err.message 
+      let message = err.message || "somthing went wrong"
       setError(message)
     }
   }
@@ -59,6 +60,7 @@ export default function Authentication() {
               label="FullName"
               variant="standard"
               name="name"
+              value={name}
               autoComplete="name"
               autoFocus
               onChange={(e) => setName(e.target.value)} /> : <></>
@@ -71,6 +73,7 @@ export default function Authentication() {
           label="Username"
           variant="standard"
           name="username"
+          value={username}
           autoComplete="username"
           autoFocus
           onChange={(e) => setUsername(e.target.value)} />
@@ -81,6 +84,7 @@ export default function Authentication() {
           label="Password"
           variant="standard"
           name="password"
+          value={password}
           type="password"
           autoComplete="password"
           autoFocus
@@ -92,12 +96,12 @@ export default function Authentication() {
         <Button variant="contained"
           type="button"
           onClick={handleAuth}>
-            {formState === 0 ? "Log In" : "Register"}</Button>
+          {formState === 0 ? "Log In" : "Register"}</Button>
       </Box>
       <Snackbar
         open={open}
         autoHideDuration={4000}
-        onClose={()=> setOpen(false)}
+        onClose={() => setOpen(false)}
         message={message}
       />
     </>

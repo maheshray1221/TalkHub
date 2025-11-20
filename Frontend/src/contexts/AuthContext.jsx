@@ -37,10 +37,14 @@ export const AuthProvider = ({ children }) => {
             let request = await client.post("/login", {
                 username,
                 password
+            },{
+                withCredentials:true
             })
 
             if (request.status === HttpStatusCode.Ok) {
-                localStorage.setItem("refreshToken", request.data.refreshToken)
+                
+                console.log("full response",request.data)
+                router("/home")
             }
         } catch (err) {
             throw err;

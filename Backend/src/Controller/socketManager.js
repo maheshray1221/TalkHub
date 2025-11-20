@@ -9,6 +9,7 @@ let timeOnline = {}
 
 const connectToSocket = (server) => {
     const io = new Server(server, {
+
         // for cors error 
         cors: {
             origin: "*",
@@ -19,6 +20,7 @@ const connectToSocket = (server) => {
     });
 
     io.on("connection", (socket) => {
+        console.log("SOMTHING CONNECTED")
 
         socket.on("join-call", (path) => {
 
